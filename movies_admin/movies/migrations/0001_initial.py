@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name': 'Кинопроизведение',
                 'verbose_name_plural': 'Кинопроизведения',
-                'db_table': 'content"."film_work',
+                'db_table': 'film_work',
             },
         ),
         migrations.CreateModel(
@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name': 'Жанр',
                 'verbose_name_plural': 'Жанры',
-                'db_table': 'content"."genre',
+                'db_table': 'genre',
             },
         ),
         migrations.CreateModel(
@@ -58,7 +58,7 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name': 'Персона',
                 'verbose_name_plural': 'Персоны',
-                'db_table': 'content"."person',
+                'db_table': 'person',
             },
         ),
         migrations.CreateModel(
@@ -71,7 +71,7 @@ class Migration(migrations.Migration):
                 ('person', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='movies.person')),
             ],
             options={
-                'db_table': 'content"."person_film_work',
+                'db_table': 'person_film_work',
             },
         ),
         migrations.CreateModel(
@@ -85,7 +85,7 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name': 'Жанр фильма',
                 'verbose_name_plural': 'Жанры фильма',
-                'db_table': 'content"."genre_film_work',
+                'db_table': 'genre_film_work',
             },
         ),
         migrations.AddField(
