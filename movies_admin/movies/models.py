@@ -4,6 +4,15 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from movies.mixins import TimeStampedMixin, UUIDMixin
 
 
+class RoleType(models.TextChoices):
+        DIRECTOR = "режисер", _("director")
+        PRODUCER = "продюсер", _("producer")
+        ACTOR = "актер", _("actor")
+    
+class FilmworkType(models.TextChoices):
+        MOVIE = "movie", _("movie")
+        TV_SHOW = "tv_show", _("tv_show")
+
 class Genre(UUIDMixin, TimeStampedMixin):
     genre_name = models.CharField(_('name'), max_length=255)
     description = models.TextField(_('description'), blank=True)
@@ -50,6 +59,8 @@ class Filmwork(UUIDMixin, TimeStampedMixin):
                                            MaxValueValidator(100)])
     genres = models.ManyToManyField(Genre, through='GenreFilmwork')
     persons = models.ManyToManyField(Person, through="PersonFilmWork")
+    type = models.CharField(_('type'), max_length=255,
+                            choices=FilmworkType.choices, blank=False)
 
     class Meta:
         db_table = "film_work"
@@ -63,16 +74,12 @@ class Filmwork(UUIDMixin, TimeStampedMixin):
     def __str__(self):
         return self.title
 
-    class FilmworkType(models.TextChoices):
-        MOVIE = "movie", _("movie")
-        TV_SHOW = "tv_show", _("tv_show")
-    type = models.CharField(_('type'), max_length=255,
-                            choices=FilmworkType.choices, blank=False)
-
 
 class PersonFilmwork(UUIDMixin, TimeStampedMixin):
     film_work = models.ForeignKey('Filmwork', on_delete=models.CASCADE)
     person = models.ForeignKey('Person', on_delete=models.CASCADE)
+    role = models.TextField(_('role'), max_length=255,
+                            choices=RoleType.choices, blank=False)
 
     class Meta:
         db_table = "person_film_work"
@@ -83,10 +90,3 @@ class PersonFilmwork(UUIDMixin, TimeStampedMixin):
                          name='film_work_person_id_role')
         ]
 
-    class RoleType(models.TextChoices):
-        DIRECTOR = "режисер", _("director")
-        PRODUCER = "продюсер", _("producer")
-        ACTOR = "актер", _("actor")
-
-    role = models.TextField(_('role'), max_length=255,
-                            choices=RoleType.choices, blank=False)
