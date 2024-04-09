@@ -34,6 +34,7 @@ class SQLToPostgres:
             for table, insert_foo in self.table_name_insert_function.items():
                 for table_row in load_from_sqlite(sqlite_curs, table_name=table):
                     insert_foo(cursor=pgcursor, item=table_row)
+                    pgconn.commit()
         conn.close()
 
 
