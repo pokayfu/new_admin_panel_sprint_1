@@ -1,7 +1,7 @@
 import sqlite3
 import psycopg2
 from settings import sql_path, dsn
-from contextlib import contextmanager
+from contextlib import contextmanager, closing
 from load_data import load_from_sqlite
 
 
@@ -22,13 +22,12 @@ class TestWorker:
             conn.close()
 
     def launch_tests(self):
-        with self.conn_context(db_path=sql_path) as conn, psycopg2.connect(**dsn) as pgconn:
+        with self.conn_context(db_path=sql_path) as conn, closing(psycopg2.connect(**dsn)) as pgconn:
             pg_cursor = pgconn.cursor()
             sqlite_cursor = conn.cursor()
             self.test_num_lines(sqlite_cursor, pg_cursor)
             self.test_data(sqlite_cursor, pg_cursor)
         conn.close()
-        pgconn.close()
 
     def test_num_lines(self, sqlite_cursor, pg_cursor):
         for table in self.list_tables:
