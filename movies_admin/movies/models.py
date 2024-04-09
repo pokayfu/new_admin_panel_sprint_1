@@ -5,7 +5,7 @@ from movies.mixins import TimeStampedMixin, UUIDMixin
 
 
 class Genre(UUIDMixin, TimeStampedMixin):
-    genre_name = models.CharField(_('name'), max_length=255)
+    name = models.CharField(_('name'), max_length=255, unique=True)
     description = models.TextField(_('description'), blank=True)
 
     class Meta:
@@ -14,12 +14,13 @@ class Genre(UUIDMixin, TimeStampedMixin):
         verbose_name_plural = 'Жанры'
 
     def __str__(self):
-        return self.genre_name
+        return self.name
 
 
-class GenreFilmwork(UUIDMixin, TimeStampedMixin):
-    film_work = models.ForeignKey('Filmwork', on_delete=models.CASCADE)
-    genre = models.ForeignKey('Genre', on_delete=models.CASCADE)
+class GenreFilmwork(UUIDMixin):
+    film_work = models.ForeignKey('Filmwork', on_delete=models.CASCADE, verbose_name=_('Filmwork'))
+    genre = models.ForeignKey('Genre', on_delete=models.CASCADE, verbose_name=_('Genre'))
+    created = models.DateTimeField(_('created'), auto_now_add=True)
 
     class Meta:
         db_table = "genre_film_work"
@@ -71,12 +72,13 @@ class Filmwork(UUIDMixin, TimeStampedMixin):
         return self.title
 
 
-class PersonFilmwork(UUIDMixin, TimeStampedMixin):
+class PersonFilmwork(UUIDMixin):
     class RoleType(models.TextChoices):
         DIRECTOR = "режисер", _("director")
         PRODUCER = "продюсер", _("producer")
         ACTOR = "актер", _("actor")
 
+    created = models.DateTimeField(_('created'), auto_now_add=True)
     film_work = models.ForeignKey('Filmwork', on_delete=models.CASCADE)
     person = models.ForeignKey('Person', on_delete=models.CASCADE)
     role = models.TextField(_('role'), max_length=255,
