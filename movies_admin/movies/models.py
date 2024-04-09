@@ -4,15 +4,6 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from movies.mixins import TimeStampedMixin, UUIDMixin
 
 
-class RoleType(models.TextChoices):
-        DIRECTOR = "режисер", _("director")
-        PRODUCER = "продюсер", _("producer")
-        ACTOR = "актер", _("actor")
-    
-class FilmworkType(models.TextChoices):
-        MOVIE = "movie", _("movie")
-        TV_SHOW = "tv_show", _("tv_show")
-
 class Genre(UUIDMixin, TimeStampedMixin):
     genre_name = models.CharField(_('name'), max_length=255)
     description = models.TextField(_('description'), blank=True)
@@ -34,6 +25,7 @@ class GenreFilmwork(UUIDMixin, TimeStampedMixin):
         db_table = "genre_film_work"
         verbose_name = 'Жанр фильма'
         verbose_name_plural = 'Жанры фильма'
+        unique_together = (('film_work_id', 'genre_id'),)
 
 
 class Person(UUIDMixin, TimeStampedMixin):
@@ -49,6 +41,10 @@ class Person(UUIDMixin, TimeStampedMixin):
 
 
 class Filmwork(UUIDMixin, TimeStampedMixin):
+    class FilmworkType(models.TextChoices):
+        MOVIE = "movie", _("movie")
+        TV_SHOW = "tv_show", _("tv_show")
+
     title = models.CharField(_('title'), max_length=255)
     description = models.TextField(_('description'),
                                    blank=True, max_length=255)
@@ -76,17 +72,18 @@ class Filmwork(UUIDMixin, TimeStampedMixin):
 
 
 class PersonFilmwork(UUIDMixin, TimeStampedMixin):
+    class RoleType(models.TextChoices):
+        DIRECTOR = "режисер", _("director")
+        PRODUCER = "продюсер", _("producer")
+        ACTOR = "актер", _("actor")
+
     film_work = models.ForeignKey('Filmwork', on_delete=models.CASCADE)
     person = models.ForeignKey('Person', on_delete=models.CASCADE)
     role = models.TextField(_('role'), max_length=255,
-                            choices=RoleType.choices, blank=False)
+                            choices=RoleType.choices, blank=False)  # Здесь использовлся choices для ограничения определенных значений, не понял в чем замечание
 
     class Meta:
         db_table = "person_film_work"
         verbose_name = 'Кинопроизведение персонажа'
         verbose_name_plural = 'Кинопроизведения персонажа'
-        indexes = [
-            models.Index(fields=['film_work_id', 'person_id', 'role'],
-                         name='film_work_person_id_role')
-        ]
-
+        unique_together = (('film_work_id', 'person_id', 'role'),)

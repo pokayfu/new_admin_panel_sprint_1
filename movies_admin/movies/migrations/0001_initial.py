@@ -11,10 +11,10 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        migrations.RunSQL("CREATE CHEMA IF NOT EXISTS content;")
     ]
 
     operations = [
+        migrations.RunSQL("CREATE SCHEMA IF NOT EXISTS content;"),
         migrations.CreateModel(
             name='Filmwork',
             fields=[
