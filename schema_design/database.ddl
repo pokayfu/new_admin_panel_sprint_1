@@ -18,8 +18,7 @@ CREATE TABLE IF NOT EXISTS content.genre (
     name TEXT,
     created timestamp with time zone,
     modified timestamp with time zone,
-    description TEXT,
-    CONSTRAINT genre_pkey PRIMARY KEY (id)
+    description TEXT
 );
 
 CREATE TABLE IF NOT EXISTS content.person (
