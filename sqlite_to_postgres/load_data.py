@@ -3,4 +3,4 @@ def load_from_sqlite(curs, table_name: str):
     curs.execute(f"SELECT * FROM {table_name}")
     for _ in range(num_lines[0]):
         data = curs.fetchone()
-        yield data
+        yield tuple(data)
