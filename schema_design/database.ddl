@@ -16,7 +16,7 @@ CREATE INDEX film_work_creation_date_idx ON content.film_work(creation_date);
 
 CREATE TABLE IF NOT EXISTS content.genre (
     id uuid PRIMARY KEY,
-    name TEXT,
+    name TEXT NOT NULL UNIQUE,
     created timestamp with time zone,
     modified timestamp with time zone,
     description TEXT
