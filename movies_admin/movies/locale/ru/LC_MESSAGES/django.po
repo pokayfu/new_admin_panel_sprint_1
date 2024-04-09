@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-02 10:40+0000\n"
+"POT-Creation-Date: 2024-04-09 13:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,54 +27,74 @@ msgstr ""
 msgid "movies"
 msgstr "Фильм"
 
-#: movies/models.py:8
+#: movies/mixins.py:7 movies/models.py:23 movies/models.py:81
 #, fuzzy
 #| msgid "creation_date"
 msgid "created"
 msgstr "Дата создания"
 
-#: movies/models.py:9
+#: movies/mixins.py:8
 msgid "modified"
 msgstr "Изменен"
 
-#: movies/models.py:25
+#: movies/models.py:8
 msgid "name"
 msgstr "Имя"
 
-#: movies/models.py:26 movies/models.py:48
+#: movies/models.py:9 movies/models.py:50
 msgid "description"
 msgstr "Описание"
 
-#: movies/models.py:47
-msgid "title"
-msgstr "Название"
+#: movies/models.py:21
+msgid "Filmwork"
+msgstr "Кинопроизведение"
 
-#: movies/models.py:50
-msgid "creation_date"
-msgstr "Дата создания"
+#: movies/models.py:22
+msgid "Genre"
+msgstr "Жанр"
 
-#: movies/models.py:52
-msgid "rating"
-msgstr "Рейтинг"
-
-#: movies/models.py:58
-msgid "movie"
-msgstr "Фильм"
-
-#: movies/models.py:59
-msgid "tv_show"
-msgstr "ТВ-Шоу"
-
-#: movies/models.py:60
-msgid "type"
-msgstr "Тип"
-
-#: movies/models.py:72
+#: movies/models.py:33
 #, fuzzy
 #| msgid "name"
 msgid "full_name"
 msgstr "Полное имя"
 
-#: movies/models.py:83
+#: movies/models.py:46
+msgid "movie"
+msgstr "Фильм"
+
+#: movies/models.py:47
+msgid "tv_show"
+msgstr "ТВ-Шоу"
+
+#: movies/models.py:49
+msgid "title"
+msgstr "Название"
+
+#: movies/models.py:52
+msgid "creation_date"
+msgstr "Дата создания"
+
+#: movies/models.py:54
+msgid "rating"
+msgstr "Рейтинг"
+
+#: movies/models.py:59
+msgid "type"
+msgstr "Тип"
+
+#: movies/models.py:77
+msgid "director"
+msgstr "Режиссер"
+
+#: movies/models.py:78
+msgid "producer"
+msgstr "Продюсер"
+
+#: movies/models.py:79
+msgid "actor"
+msgstr "Актёр"
+
+#: movies/models.py:84
 msgid "role"
 msgstr "Роль"

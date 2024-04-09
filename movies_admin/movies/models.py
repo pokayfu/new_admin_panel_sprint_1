@@ -82,7 +82,7 @@ class PersonFilmwork(UUIDMixin):
     film_work = models.ForeignKey('Filmwork', on_delete=models.CASCADE)
     person = models.ForeignKey('Person', on_delete=models.CASCADE)
     role = models.TextField(_('role'), max_length=255,
-                            choices=RoleType.choices, blank=False)  # Здесь использовлся choices для ограничения определенных значений, не понял в чем замечание
+                            choices=RoleType.choices, blank=False)  # Здесь использовался choices для ограничения определенных значений, не понял в чем замечание
 
     class Meta:
         db_table = "person_film_work"
