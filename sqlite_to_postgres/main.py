@@ -39,6 +39,6 @@ class SQLToPostgres:
 
 
 if __name__ == '__main__':
-    sqltopostgres = SQLToPostgres()
-    sqltopostgres.run()
+    #sqltopostgres = SQLToPostgres()
+    #sqltopostgres.run()
     TestWorker().launch_tests()
