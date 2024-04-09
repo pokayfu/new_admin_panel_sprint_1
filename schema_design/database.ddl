@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS content.film_work (
     id uuid PRIMARY KEY,
     title TEXT NOT NULL,
     description TEXT,
+    file_path TEXT,
     creation_date DATE,
     rating FLOAT  CHECK (rating >= 0 AND rating <= 100),
     type TEXT not null,
